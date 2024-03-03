@@ -1,48 +1,45 @@
 # Minesweeper Game
 
-This is a Minesweeper game played in the terminal.
+## Introduction
+This is a simple implementation of the classic game Minesweeper in Java. The game is played in the console and follows the standard rules of Minesweeper.
 
-## Gameplay Loop:
-- The program starts by asking players the dimensions of the minefield they would like to clear.
-- It creates two minefields:
-    - `minefieldAlpha`: Tracks the game state.
-    - `minefieldBeta`: Shown to players.
-- The program enters a while loop, repeatedly prompting players for coordinates, then checking the game state via `minefieldAlpha` to determine the result.
+## Game Overview
+In Minesweeper, the player is presented with a grid of squares. Some of these squares contain mines, and the goal of the game is to uncover all the squares that do not contain mines without triggering any mines. If a square containing a mine is uncovered, the game ends.
 
-## Methods:
+## Setup
+To play the game, you'll need Java installed on your system. Simply compile the provided Java files and run the `Main` class. The game will prompt you to input the size of the minefield (number of rows and columns) and then guide you through playing.
 
-### `MineSweeper()`
-The constructor method `MineSweeper()` initializes all the variables and methods necessary for the creation of the game state.
+## Classes
+1. **Main**: This class contains the main method to start the game. It creates an instance of the `MineSweeper` class and calls its `run()` method.
+   
+2. **MineSweeper**: This class represents the game logic. It handles user input, updates the minefield, and checks for win/loss conditions.
+   
+3. **Minefield**: This class represents the grid of blocks in which the game is played. It generates the minefield, places mines randomly, and calculates the number of adjacent mines for each non-mine block.
+   
+4. **Block**: This class represents each square in the minefield. It stores the position of the block, its value (mine or number of adjacent mines), and whether it is open (revealed) or closed.
 
-### `run()`
-This is the method where the gameplay loop takes place. A while loop connected to a boolean flag checks if the player has won or lost.
+## Game Flow
+1. The game starts by asking the player to input the size of the minefield.
+2. The minefield is generated, and mines are randomly placed.
+3. The player takes turns to input coordinates to uncover blocks on the minefield.
+4. If a block containing a mine is uncovered, the game ends in a loss.
+5. If all non-mine blocks are uncovered, the game ends in a win.
 
-### `String[][] createMinefieldAlpha()`
-Returns `minefieldAlpha` to `this.minefieldAlpha`. Utilizes `fillZero()` to prepare `minefieldAlpha` for `fillNumbers()`. Mines are placed at random coordinates, and after each placement, `fillNumbers()` is called. This loop continues until the desired number of mines is achieved.
+## Playing the Game
+- The player inputs the row and column coordinates of the block they want to uncover.
+- The game reveals the value of the block.
+- If the block contains a mine, the game ends.
+- If the block is empty, adjacent blocks may also be automatically revealed.
+- The game continues until the player either wins or loses.
 
-### `fillZero(String[][] minefield)`
-Prepares the minefield for `fillNumbers()`. Adjacent squares to mines are initialized to 0 to be correctly incremented later.
+## Win/Loss Conditions
+- **Win**: All non-mine blocks are uncovered.
+- **Loss**: The player uncovers a block containing a mine.
 
-### `fillNumbers(String[][] array, int squareRow, int squareCol)`
-Processes a minefield array, row coordinate, and column coordinate. Adjacent squares to a mine are incremented if they don't contain a mine. The `isValid()` method ensures array bounds are respected.
+## Additional Notes
+- The game uses a simple console interface for input/output.
+- The minefield size and mine density can be adjusted by changing parameters in the code.
+- The game does not feature a graphical user interface (GUI) and is played entirely in the console.
 
-### `boolean isValid(int r, int c)`
-Ensures the program doesn't access an out-of-bounds array index. Used in the `fillNumbers()` method.
-
-### `String[][] createMinefieldBeta()`
-Returns the created `minefieldBeta` after populating it with minus signs via `fillMinus()`.
-
-### `fillMinus(String[][] minefield)`
-Populates each square in the minefield with "-".
-
-### `printMinefield(String[][] minefield)`
-Prints out the provided minefield. Abstracted to a method due to frequent use throughout the program.
-
-### `String[][] initialMinefieldView()`
-For testing purposes, this method prints the locations of all mines. If a square does not contain a mine, it is printed as "-".
-
-### `checkWinCondition()`
-After each loop in `run()`, this method compares opened squares with the maximum possible number of open squares to determine if the player has won.
-
-### `revealAllMines()`
-Upon exiting the `run()` loop, all mines in the minefield are displayed to the player, regardless of the game's outcome.
+## Conclusion
+This Minesweeper implementation provides a basic yet functional version of the classic game. It demonstrates fundamental concepts of Java programming, including object-oriented design, user input/output, and randomization. Players can enjoy the challenge of uncovering blocks strategically while avoiding mines in this console-based adaptation of Minesweeper.
