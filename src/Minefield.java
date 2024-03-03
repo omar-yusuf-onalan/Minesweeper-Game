@@ -82,7 +82,16 @@ public class Minefield {
     }
 
     public void print() {
+        for (int i = 0; i < rowSize; i++) {
+            for (int j = 0; j < columnSize; j++) {
 
+                if (blocks[i][j].isOpen())
+                    System.out.print(blocks[i][j].getValue() + " ");
+                else
+                    System.out.print("- ");
+            }
+            System.out.println();
+        }
     }
 
     public String getBlockValue(int row, int column) {
