@@ -2,13 +2,18 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Minefield {
+    private final int rowSize;
+    private final int columnSize;
     private Block[][] blocks;
 
     public Minefield(int rowSize, int columnSize) {
-        setUpMinefield(rowSize, columnSize);
+        this.rowSize = rowSize;
+        this.columnSize = columnSize;
+
+        setUpMinefield();
     }
 
-    public void setUpMinefield(int rowSize, int columnSize) {
+    public void setUpMinefield() {
         // step #1: Create all the blocks with null values
         blocks = new Block[rowSize][columnSize];
 
@@ -37,11 +42,43 @@ public class Minefield {
             }
         }
 
-
-
-
         // step #3: Every other block's value field will be null. Turn the
         // null value into the number of adjacent mines.
+        for (int i = 0; i < rowSize; i++) {
+            for (int j = 0; j < columnSize; j++) {
+                boolean blockContainsAMine = "*".equals(blocks[i][j].getValue());
+
+                if (blockContainsAMine)
+                    continue;
+
+                countAdjacentMines(i, j);
+            }
+        }
+    }
+
+    private void countAdjacentMines(int currentRow, int currentColumn) {
+        int adjacentMines = 0;
+
+        for (int i = currentRow - 1; i < currentRow + 2; i++) {
+            for (int j = currentColumn - 1; j < currentColumn + 2; j++) {
+                boolean indexIsOutOfBounds = i == -1 || i == rowSize || j == -1 || j == columnSize;
+
+                if (indexIsOutOfBounds)
+                    continue;
+
+                boolean blockIsTheOriginalBlock = i == currentRow && j == currentColumn;
+
+                if (blockIsTheOriginalBlock)
+                    continue;
+
+                boolean blockContainsAMine = "*".equals(blocks[i][j].getValue());
+
+                if (blockContainsAMine)
+                    adjacentMines++;
+            }
+        }
+
+        blocks[currentRow][currentColumn].setValue(String.valueOf(adjacentMines));
     }
 
     public void print() {
