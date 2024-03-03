@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Random;
 
 public class Minefield {
     private Block[][] blocks;
@@ -19,6 +20,25 @@ public class Minefield {
 
         // step #2: Loop the minefield until 1/4 of the minefield is
         // randomly placed mines.
+        Random random = new Random();
+
+        int numberOfMinesToPlace = rowSize * columnSize / 4;
+        int minesPlaced = 0;
+
+        while (minesPlaced < numberOfMinesToPlace) {
+            int randomRow = random.nextInt(rowSize);
+            int randomColumn = random.nextInt(columnSize);
+
+            boolean theValueOfTheSelectedBlockIsNull = blocks[randomRow][randomColumn].getValue() == null;
+
+            if (theValueOfTheSelectedBlockIsNull) {
+                blocks[randomRow][randomColumn].setValue("*");
+                minesPlaced++;
+            }
+        }
+
+
+
 
         // step #3: Every other block's value field will be null. Turn the
         // null value into the number of adjacent mines.
