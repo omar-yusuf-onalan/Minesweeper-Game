@@ -18,7 +18,7 @@ public class Minefield {
 
         for (int i = 0; i < rowSize; i++) {
             for (int j = 0; j < columnSize; j++) {
-                blocks[i][j] = new Block(i, j, null);
+                blocks[i][j] = new Block(null);
             }
         }
 

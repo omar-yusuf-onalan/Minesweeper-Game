@@ -1,22 +1,10 @@
 public class Block {
-    private final int rowPosition;
-    private final int columnPosition;
     private String value;
     private boolean isOpen;
 
-    public Block(int rowPosition, int columnPosition, String value) {
-        this.rowPosition = rowPosition;
-        this.columnPosition = columnPosition;
+    public Block(String value) {
         this.value = value;
         this.isOpen = false;
-    }
-
-    public int getRowPosition() {
-        return rowPosition;
-    }
-
-    public int getColumnPosition() {
-        return columnPosition;
     }
 
     public String getValue() {
